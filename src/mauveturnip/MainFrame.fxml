@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mauveturnip.MainFrame">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="mResetMenuItem" mnemonicParsing="false" onAction="#onActionReset" text="リセット" />
+                  <MenuItem mnemonicParsing="false" onAction="#onActionItemManager" text="アイテム管理" />
+            <MenuItem mnemonicParsing="false" onAction="#onActionQuit" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="mMoneyLabel" alignment="CENTER_RIGHT" layoutX="44.0" layoutY="33.0" prefHeight="15.0" prefWidth="211.0" styleClass="money" stylesheets="@MainFrame.css" text="Label">
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="334.0" layoutY="16.0" prefHeight="237.0" prefViewportHeight="200.0" prefViewportWidth="220.0" prefWidth="293.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="334.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="16.0">
+               <content>
+                  <VBox fx:id="mItemBoxVBox" layoutX="307.0" layoutY="79.0" prefHeight="287.0" prefWidth="278.0" />
+               </content>
+            </ScrollPane>
+            <Label fx:id="mTotalIncomeLabel" alignment="CENTER_RIGHT" layoutX="44.0" layoutY="69.0" prefHeight="15.0" prefWidth="211.0" styleClass="totalIncome" stylesheets="@MainFrame.css" text="Label">
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <Label fx:id="mDeltaPerSecLabel" alignment="CENTER_RIGHT" layoutX="44.0" layoutY="104.0" prefHeight="15.0" prefWidth="211.0" styleClass="money" stylesheets="@MainFrame.css" text="Label">
+               <effect>
+                  <Reflection />
+               </effect>
+            </Label>
+            <ScrollPane fx:id="mFieldScroll" layoutX="20.0" layoutY="151.0" prefHeight="208.0" prefWidth="300.0" AnchorPane.bottomAnchor="16.0" AnchorPane.topAnchor="151.0" />
+            <TextArea fx:id="mMsgTextArea" editable="false" focusTraversable="false" layoutX="333.0" layoutY="258.0" prefHeight="103.0" prefWidth="293.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="333.0" AnchorPane.rightAnchor="14.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="103.0" layoutX="334.0" layoutY="255.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="293.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <fill>
+                  <LinearGradient endX="0.5238095238095238" endY="1.0" startX="0.5047619047619047">
+                     <stops>
+                        <Stop color="#ffffff00" />
+                        <Stop color="#ffffff94" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Rectangle>
+         </children></AnchorPane>
+  </children>
+</VBox>

@@ -1,0 +1,13 @@
+.equip-cell {
+	-fx-background-color:  #ffddee;
+	-fx-border-width: 1px 0 1px;
+	-fx-border-color:  white gray white;
+}
+
+.equip-cell:hover {
+	-fx-background-color: #ffcccc;
+}
+
+.equip-cell:pressed {
+	-fx-background-color: #ffff99;
+}

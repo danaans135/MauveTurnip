@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<HBox alignment="CENTER" styleClass="equip-cell" stylesheets="@EquipCell.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mauveturnip.EquipCell">
+   <children>
+      <ImageView fx:id="mImageView" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER" />
+      <VBox style="-fx-padding: 4px;" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox>
+               <children>
+                  <Label fx:id="mNameLabel" text="Label" HBox.hgrow="NEVER" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Label fx:id="mAmountLabel" alignment="BOTTOM_LEFT" text="Label" HBox.hgrow="NEVER" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="mPriceLabel" text="Label" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</HBox>
