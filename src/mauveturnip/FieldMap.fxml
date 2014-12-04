@@ -9,11 +9,11 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="fieldMapPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="280.0" stylesheets="@MainFrame.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mauveturnip.FieldMapController">
    <children>
-      <Circle fill="DODGERBLUE" layoutX="150.0" layoutY="571.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="150.0" layoutY="503.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="109.0" layoutY="436.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="191.0" layoutY="436.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="150.0" layoutY="571.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="check-point" />
+      <Circle fill="DODGERBLUE" layoutX="150.0" layoutY="503.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="check-point" />
+      <Circle disable="true" fill="DODGERBLUE" layoutX="109.0" layoutY="436.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="check-point" />
+      <Circle disable="true" fill="DODGERBLUE" layoutX="191.0" layoutY="436.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="check-point" />
    </children>
 </AnchorPane>

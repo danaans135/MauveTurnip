@@ -21,63 +21,14 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
 public class MainFrame {
-//    public class MyCell extends ListCell<Item> {
-//
-//        private Button mBuyButton = new Button("buy");
-//        private Button mSellButton = new Button("sell");
-//        {
-//            mBuyButton.setOnAction((ev) -> System.out.println("i="+getItem().getName()));
-//        }
-//
-//        @Override
-//        protected void updateItem(Item item, boolean empty) {
-//            super.updateItem(item, empty);
-//            if (empty) {
-//                setGraphic(null);
-//            } else {
-////                HBox hbox1 = new HBox(new Label("item:"+item.getName()), new Label("item:"+item.getName()));
-////                mBuyButton = new Button("buy");
-////                buyButton.setOnAction((ev) -> {
-////                    System.out.println("buy");
-////                });
-//                HBox hbox2 = new HBox();
-////                mBuyButton.setText("buy");
-////                hbox2.getChildren().addAll(mBuyButton, mSellButton);
-////                VBox vbox = new VBox(hbox1, hbox2);
-////                mBuyButton.setText("buy");
-//                setGraphic(mBuyButton);
-//            }
-//        }
-//
-//    }
-
-    private final class BigDecimalStringConverter extends StringConverter<BigDecimal> {
-
-        private String mFormat;
-
-        public BigDecimalStringConverter() {
-            this("%,3.0f");
-        }
-
-        public BigDecimalStringConverter(String format) {
-            super();
-            mFormat = format;
-        }
-
-        @Override
-        public String toString(BigDecimal val) {
-            return String.format(mFormat, val);
-        }
-
-        @Override
-        public BigDecimal fromString(String str) {
-            return new BigDecimal(str);
-        }
-    }
 
     private static final Logger logger = Logger.getLogger(MainFrame.class.getName());
 
@@ -104,6 +55,12 @@ public class MainFrame {
 
     @FXML
     private TextArea mMsgTextArea;
+
+    @FXML
+    private ToggleGroup buyCount;
+
+    @FXML
+    private HBox buyCountBox;
 
     @FXML
     void initialize() {
@@ -162,11 +119,52 @@ public class MainFrame {
         try {
             Parent fieldMap = FXMLLoader.load(getClass().getResource("FieldMap.fxml"));
             mFieldScroll.setContent(fieldMap);
+            Platform.runLater(() -> mFieldScroll.setVvalue(0.9));
 //            mFieldScroll.setVvalue(mFieldScroll.getVmax());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        buyCount = new ToggleGroup();
+//        buyCount.selectedToggleProperty().addListener((ev, oldToggle, newToggle) -> {
+//            onChangeBuyCount(newToggle);
+//        });
+        ToggleButton x1Button = new ToggleButton("x1");
+//        x1Button.setToggleGroup(buyCount);
+//        BooleanBinding bx = new BooleanBinding() {
+        class Hoge extends BooleanBinding {
+            private BigDecimal mCount;
+             public Hoge(BigDecimal count) {
+                mCount = count;
+                super.bind(Global.getInstance().buyCountProperty());
+            }
+            @Override
+            protected boolean computeValue() {
+                return  Global.getInstance().getBuyCount().equals(mCount);
+            }
+        };
+//        x1Button.selectedProperty().bind(new Hoge(new BigDecimal("1")));
+        x1Button.setOnAction(ev -> {
+            Global.getInstance().setBuyCount(new BigDecimal("1"));
+        });
+        buyCount.getToggles().add(x1Button);
+        buyCountBox.getChildren().add(x1Button);
+        ToggleButton x10Button = new ToggleButton("x10");
+//        x10Button.selectedProperty().bind(new Hoge(new BigDecimal("10")));
+        x10Button.setOnAction(ev -> {
+            Global.getInstance().setBuyCount(new BigDecimal("10"));
+        });
+        buyCount.getToggles().add(x10Button);
+        buyCountBox.getChildren().add(x10Button);
     }
+
+//    private void onChangeBuyCount(Toggle newToggle) {
+//        if (newToggle != null) {
+////            Global.getInstance().setBuyCount(newToggle.getUserData());
+//            System.out.println(newToggle.toString());
+//
+//        }
+//    }
 
     private void onChangeEquipList(Change<? extends Equipment> ev) {
         mItemBoxVBox.getChildren().clear();
@@ -179,7 +177,8 @@ public class MainFrame {
                 }
                 @Override
                 protected boolean computeValue() {
-                    return Global.getInstance().getMoney().compareTo(equip.getItem().getPrice()) < 0;
+                    BigDecimal price = equip.getItem().getPrice().multiply(Global.getInstance().getBuyCount());
+                    return Global.getInstance().getMoney().compareTo(price) < 0;
                 }
             };
             equipListItem.disableProperty().bind(b);
@@ -192,10 +191,11 @@ public class MainFrame {
 
     private void onClickEquipListItem(Equipment equip) {
         // 所持金減
-        BigDecimal res = Global.getInstance().getMoney().subtract(equip.getItem().getPrice());
+        BigDecimal price = equip.getItem().getPrice().multiply(Global.getInstance().getBuyCount());
+        BigDecimal res = Global.getInstance().getMoney().subtract(price);
         Global.getInstance().setMoney(res);
         // 所有数増
-        equip.setAmount(equip.getAmount() + 1);
+        equip.setAmount(equip.getAmount() + Global.getInstance().getBuyCount().intValue());
 //        Global.getInstance().printMessage(equip.getItem().getName() + "が1増えた。");
 
     }
@@ -217,6 +217,30 @@ public class MainFrame {
     void onActionItemManager(ActionEvent event) {
         logger.info(() -> "called");
         new ItemDialog().show();
+    }
+
+    private final class BigDecimalStringConverter extends StringConverter<BigDecimal> {
+
+        private String mFormat;
+
+        public BigDecimalStringConverter() {
+            this("%,3.0f");
+        }
+
+        public BigDecimalStringConverter(String format) {
+            super();
+            mFormat = format;
+        }
+
+        @Override
+        public String toString(BigDecimal val) {
+            return String.format(mFormat, val);
+        }
+
+        @Override
+        public BigDecimal fromString(String str) {
+            return new BigDecimal(str);
+        }
     }
 
 

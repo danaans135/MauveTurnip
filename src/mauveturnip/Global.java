@@ -44,6 +44,11 @@ public class Global {
 //        }
 //    }
 
+    private ObjectProperty<BigDecimal> buyCount = new SimpleObjectProperty<BigDecimal>();
+    public ObjectProperty<BigDecimal> buyCountProperty() { return buyCount; }
+    public BigDecimal getBuyCount() { return buyCount.get(); }
+    public void setBuyCount(BigDecimal buyCount) { this.buyCount.set(buyCount); }
+
     private ListProperty<String> messageList = new SimpleListProperty<String>(FXCollections.observableArrayList());
     public ListProperty<String> messageListProperty() { return messageList; }
     public ObservableList<String> getMessageList() { return messageList.get(); }
@@ -88,8 +93,6 @@ public class Global {
     }
 
     public void init(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
-        stage.setScene(new Scene(root));
 
         int fps = 30;
         Duration frameAmt = Duration.millis(1000/fps);
@@ -98,9 +101,9 @@ public class Global {
         mLoop.getKeyFrames().add(keyFrame);
         mLoop.setCycleCount(Animation.INDEFINITE);
 
-        System.out.println("a");
-        setMoney(new BigDecimal(100));
-        setTotalIncome(new BigDecimal(0));
+        setMoney(new BigDecimal("10"));
+        setTotalIncome(new BigDecimal("0"));
+
         getItems().add(new Item("Ari", 0, 10));
         getItems().add(new Item("Tombo", 0, 200));
         getItems().add(new Item("Hachi", 3000, 3200));
@@ -108,10 +111,13 @@ public class Global {
         getItems().add(new Item("Kuwagata", 2000000, 1200000));
         getItems().add(new Item("Kabuto", 14000000, 10000000));
 
+        setBuyCount(new BigDecimal("1"));
         // アリ、トンボ、ハチ、クワガタ、カブトムシ、カミキリ、チョウ、バッタ
 //        getEquipList().add(new Equipment(new Item("A1")));
 //        getEquipList().add(new Equipment(new Item("A2")));
 
+        Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
+        stage.setScene(new Scene(root));
     }
 
 //    private boolean tmpFlag = false;

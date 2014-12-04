@@ -1,3 +1,23 @@
 .money {
 	-fx-font-size: 18px;
 }
+
+.check-point {
+	-fx-fill: orange;
+	-fx-stroke: blue;
+}
+
+.check-point:hover {
+	-fx-fill: red;
+	-fx-stroke: blue;
+}
+
+.check-point:pressed {
+	-fx-fill: #808000;
+	-fx-stroke: blue;
+}
+
+.check-point:disabled {
+	-fx-fill: #c0c0c0;
+	-fx-stroke: #808080;
+}
